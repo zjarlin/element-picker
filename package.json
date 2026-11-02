@@ -1,0 +1,77 @@
+{
+  "name": "@zjarlin/element-picker",
+  "version": "0.1.0",
+  "description": "浏览器元素拾取 → 源码定位：编译期把模板元素位置写进 DOM，运行期提供 Chrome 式拾取器与 Vue 组件链解析（无业务符号，可直接被任何 Vite + Vue 项目依赖）",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zjarlin/element-picker.git"
+  },
+  "homepage": "https://github.com/zjarlin/element-picker#readme",
+  "bugs": {
+    "url": "https://github.com/zjarlin/element-picker/issues"
+  },
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": false,
+  "keywords": [
+    "element-picker",
+    "source-locator",
+    "vue",
+    "vite",
+    "devtools",
+    "inspect-element"
+  ],
+  "files": [
+    "src",
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "exports": {
+    ".": "./src/index.ts",
+    "./vite": "./src/vite.ts",
+    "./browser": "./src/browser.ts",
+    "./location": "./src/location.ts"
+  },
+  "peerDependencies": {
+    "vite": ">=5",
+    "vue": "^3.5.0"
+  },
+  "peerDependenciesMeta": {
+    "vite": {
+      "optional": true
+    },
+    "vue": {
+      "optional": true
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
+  "publishConfig": {
+    "access": "public",
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "./vite": {
+        "types": "./dist/vite.d.ts",
+        "default": "./dist/vite.js"
+      },
+      "./browser": {
+        "types": "./dist/browser.d.ts",
+        "default": "./dist/browser.js"
+      },
+      "./location": {
+        "types": "./dist/location.d.ts",
+        "default": "./dist/location.js"
+      }
+    }
+  },
+  "devDependencies": {
+    "@types/node": "^24.19.2",
+    "typescript": "~5.9.3"
+  }
+}
