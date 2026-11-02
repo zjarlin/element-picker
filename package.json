@@ -75,7 +75,6 @@
   },
   "scripts": {
     "build": "tsc -p tsconfig.build.json && tsc -p tsconfig.build.cjs.json && node scripts/finish-cjs.mjs",
-    "typecheck": "tsc --noEmit -p tsconfig.json",
-    "prepublishOnly": "npm run build"
+    "typecheck": "tsc --noEmit -p tsconfig.json"
   }
 }
