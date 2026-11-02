@@ -54,6 +54,9 @@ Vite 6 起配置文件走 ESM，可以直接 `import` 本包；但 **Vite 5 会�
 
 `exports` 用 `import` / `require` 两个条件分发，宿主不需要额外配置，也不需要锁 vite 版本。
 
+入口一律指向 `dist/`（`main` / `module` / `types` / `exports` 同源），**从仓库直接引用前必须先
+`pnpm build`**；`npm publish` 前会自动跑一次 `prepublishOnly` 构建，避免发出空 `dist`。
+
 ### `root` 取仓库根，不是 `ui/`
 
 位置属性是**仓库内相对路径**。`@vitejs/plugin-vue` 的 transform 与
@@ -113,7 +116,8 @@ picker.enable()          // ⌘⇧E / Ctrl⇧E 切换
 ```bash
 pnpm install
 pnpm typecheck      # tsc --noEmit
-pnpm build          # 产出 dist/（发布用）
+pnpm build          # 产出 dist/（ESM + CJS）
+npm pack            # 检查发布内容：dist + src + README/LICENSE
 ```
 
 ## 发布

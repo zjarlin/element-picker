@@ -28,12 +28,9 @@
     "README.md",
     "LICENSE"
   ],
-  "exports": {
-    ".": "./src/index.ts",
-    "./vite": "./src/vite.ts",
-    "./browser": "./src/browser.ts",
-    "./location": "./src/location.ts"
-  },
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "peerDependencies": {
     "vite": ">=5",
     "vue": "^3.5.0"
@@ -46,37 +43,39 @@
       "optional": true
     }
   },
-  "scripts": {
-    "build": "tsc -p tsconfig.build.json && tsc -p tsconfig.build.cjs.json && node scripts/finish-cjs.mjs",
-    "typecheck": "tsc --noEmit -p tsconfig.json"
-  },
-  "publishConfig": {
-    "access": "public",
-    "exports": {
-      ".": {
-        "types": "./dist/index.d.ts",
-        "import": "./dist/index.js",
-        "require": "./dist/cjs/index.js"
-      },
-      "./vite": {
-        "types": "./dist/vite.d.ts",
-        "import": "./dist/vite.js",
-        "require": "./dist/cjs/vite.js"
-      },
-      "./browser": {
-        "types": "./dist/browser.d.ts",
-        "import": "./dist/browser.js",
-        "require": "./dist/cjs/browser.js"
-      },
-      "./location": {
-        "types": "./dist/location.d.ts",
-        "import": "./dist/location.js",
-        "require": "./dist/cjs/location.js"
-      }
-    }
-  },
   "devDependencies": {
     "@types/node": "^24.19.2",
     "typescript": "~5.9.3"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/cjs/index.js"
+    },
+    "./vite": {
+      "types": "./dist/vite.d.ts",
+      "import": "./dist/vite.js",
+      "require": "./dist/cjs/vite.js"
+    },
+    "./browser": {
+      "types": "./dist/browser.d.ts",
+      "import": "./dist/browser.js",
+      "require": "./dist/cjs/browser.js"
+    },
+    "./location": {
+      "types": "./dist/location.d.ts",
+      "import": "./dist/location.js",
+      "require": "./dist/cjs/location.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json && tsc -p tsconfig.build.cjs.json && node scripts/finish-cjs.mjs",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "prepublishOnly": "npm run build"
   }
 }
