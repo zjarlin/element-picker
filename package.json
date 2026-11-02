@@ -11,6 +11,7 @@
     "url": "https://github.com/zjarlin/element-picker/issues"
   },
   "license": "MIT",
+  "packageManager": "pnpm@11.7.0",
   "type": "module",
   "sideEffects": false,
   "keywords": [
