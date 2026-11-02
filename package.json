@@ -47,7 +47,7 @@
     }
   },
   "scripts": {
-    "build": "tsc -p tsconfig.build.json",
+    "build": "tsc -p tsconfig.build.json && tsc -p tsconfig.build.cjs.json && node scripts/finish-cjs.mjs",
     "typecheck": "tsc --noEmit -p tsconfig.json"
   },
   "publishConfig": {
@@ -55,19 +55,23 @@
     "exports": {
       ".": {
         "types": "./dist/index.d.ts",
-        "default": "./dist/index.js"
+        "import": "./dist/index.js",
+        "require": "./dist/cjs/index.js"
       },
       "./vite": {
         "types": "./dist/vite.d.ts",
-        "default": "./dist/vite.js"
+        "import": "./dist/vite.js",
+        "require": "./dist/cjs/vite.js"
       },
       "./browser": {
         "types": "./dist/browser.d.ts",
-        "default": "./dist/browser.js"
+        "import": "./dist/browser.js",
+        "require": "./dist/cjs/browser.js"
       },
       "./location": {
         "types": "./dist/location.d.ts",
-        "default": "./dist/location.js"
+        "import": "./dist/location.js",
+        "require": "./dist/cjs/location.js"
       }
     }
   },

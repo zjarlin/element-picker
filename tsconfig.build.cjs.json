@@ -1,0 +1,21 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "allowImportingTsExtensions": false,
+    "rewriteRelativeImportExtensions": true,
+    "declaration": false,
+    "sourceMap": false,
+    "verbatimModuleSyntax": false,
+    "esModuleInterop": true,
+    "module": "CommonJS",
+    "moduleResolution": "Node10",
+    "outDir": "dist/cjs",
+    "rootDir": "src",
+    "paths": {
+      "vite": ["./node_modules/vite/dist/node/index.d.ts"],
+      "vue/compiler-sfc": ["./node_modules/vue/compiler-sfc/index.d.ts"]
+    }
+  },
+  "include": ["src/**/*.ts"]
+}

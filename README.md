@@ -41,6 +41,33 @@ export default defineConfig({
 
 `features.prodDevtools` 只在**生产构建**下才有区别；开发构建默认保留。
 
+### 兼容 Vite 5（CJS 配置加载器）
+
+Vite 6 起配置文件走 ESM，可以直接 `import` 本包；但 **Vite 5 会把 `vite.config.ts`
+当 CommonJS 加载**，纯 ESM 包会在 `require` 阶段报
+`ESM file cannot be loaded by require`。本包因此同时产出 ESM 与 CJS：
+
+| 产物 | 路径 | 谁用 |
+| --- | --- | --- |
+| ESM | `dist/*.js` | Vite 6+、浏览器 |
+| CJS | `dist/cjs/*.js`（附 `{"type":"commonjs"}`） | Vite 5 的配置加载器 |
+
+`exports` 用 `import` / `require` 两个条件分发，宿主不需要额外配置，也不需要锁 vite 版本。
+
+### `root` 取仓库根，不是 `ui/`
+
+位置属性是**仓库内相对路径**。`@vitejs/plugin-vue` 的 transform 与
+`sourceLocatorPlugin` 的 `root` 必须指向同一层（通常取 `process.cwd()` 的上一级），
+`directories` 再列出要扫的源码目录：
+
+```ts
+const repoRoot = resolve(process.cwd(), '..')
+markSourceElements({ root: repoRoot })
+sourceLocatorPlugin({ root: repoRoot, directories: ['ui/src', 'studio/packages'] })
+```
+
+否则卡片给出的是 `src/xxx.vue` 这种相对于 `ui/` 的路径，跨包（`studio/packages/**`）时会指错。
+
 ```ts
 // 任意宿主代码（浏览器端）
 import { createSourcePicker } from '@zjarlin/element-picker/browser'
