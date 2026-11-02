@@ -68,4 +68,5 @@ jobs:
             exit 0
           fi
           echo "publish ${name}@${version} -> ${NPM_DIST_TAG}"
-          pnpm publish --access public --tag "${NPM_DIST_TAG}" --no-git-checks
+          # 必须用 npm 而不是 pnpm：OIDC token exchange 只有 npm 实现，pnpm 会 404。
+          npm publish --access public --tag "${NPM_DIST_TAG}" --provenance
